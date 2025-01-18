@@ -1,21 +1,21 @@
 <script setup lang="ts">
-import GuestLayout from '@/Layouts/GuestLayout.vue';
-import InputError from '@/Components/InputError.vue';
-import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
-import { Head, useForm } from '@inertiajs/vue3';
+import GuestLayout from "@/Layouts/GuestLayout.vue";
+import InputError from "@/Components/breezCompornents/InputError.vue";
+import InputLabel from "@/Components/breezCompornents/InputLabel.vue";
+import PrimaryButton from "@/Components/breezCompornents/PrimaryButton.vue";
+import TextInput from "@/Components/breezCompornents/TextInput.vue";
+import { Head, useForm } from "@inertiajs/vue3";
 
 defineProps<{
     status?: string;
 }>();
 
 const form = useForm({
-    email: '',
+    email: "",
 });
 
 const submit = () => {
-    form.post(route('password.email'));
+    form.post(route("password.email"));
 };
 </script>
 
@@ -29,10 +29,7 @@ const submit = () => {
             you to choose a new one.
         </div>
 
-        <div
-            v-if="status"
-            class="mb-4 text-sm font-medium text-green-600"
-        >
+        <div v-if="status" class="mb-4 text-sm font-medium text-green-600">
             {{ status }}
         </div>
 
