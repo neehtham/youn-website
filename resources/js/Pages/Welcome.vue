@@ -1,32 +1,30 @@
 <script setup lang="ts">
-import Navbar from "@/Components/webCompornents/Navbar.vue";
-import { Head } from "@inertiajs/vue3";
-import { ref } from "vue";
-import Button from "primevue/button";
-
-import Menubar from "primevue/menubar";
 import EventHighlight from "@/Components/webCompornents/eventHighlight.vue";
+import MainLayout from "@/Layouts/MainLayout.vue";
+import HighlightCarrosell from "@/Components/webCompornents/highlightCarrosell.vue";
 </script>
 
-<template class="bg-white">
-    <div>
-        <Head>
-            <title>Welcome</title>
-        </Head>
-        <Navbar></Navbar>
-    </div>
-    <div class="h-80"></div>
-    <div class="mx-40">
-        <div
-            class="flex flex-col md:flex-row justify-around w-full font-hadings font-bold"
-        >
-            <p class="text-3xl text-blue">Our Programes</p>
-            <a href="/Programes">
-                <p class="text-2xl text-blue">View more >></p>
-            </a>
+<template class="">
+    <MainLayout>
+        <div class="grow px-12 max-w-6xl pt-12">
+            <!-- TODO: Add slideshow  -->
+            <div
+                class="flex pt-5 justify-between w-full font-hadings font-bold"
+            >
+                <p class="text-3xl text-blue">Our Programes</p>
+                <a href="/Programes">
+                    <p class="text-2xl text-blue hover:underline">
+                        View more >>
+                    </p>
+                </a>
+            </div>
+            <div class="p-12 lx:flex">
+                <EventHighlight></EventHighlight>
+            </div>
+            <!-- <div class="p-12 flex lx:hidden">
+                <HighlightCarrosell></HighlightCarrosell>
+            </div> -->
+            <!-- TODO:FIXME: Uncomment this line -->
         </div>
-        <div class="ml-4 md:ml-48 max-w-full md:max-w-4xl">
-            <EventHighlight></EventHighlight>
-        </div>
-    </div>
+    </MainLayout>
 </template>

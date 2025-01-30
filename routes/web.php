@@ -12,6 +12,16 @@ Route::get('/', function () {
 Route::get('/About', function () {
     return Inertia::render('About');
 });
+Route::get('/Donate', function () {
+    return Inertia::render('Donate');
+});
+Route::get('/Programes', function () {
+    return Inertia::render('programes');
+});
+Route::get('/Programes/1', function () {
+    return Inertia::render('program');
+});
+
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
