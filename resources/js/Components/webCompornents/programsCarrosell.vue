@@ -13,7 +13,7 @@
             <swiper-slide v-for="program in programes" :key="program.name">
                 <a :href="'/Programes/' + program.id">
                     <img
-                        class="min-w-48 rounded-lg hover:opacity-85 transform transition-transform duration-400 hover:scale-105"
+                        class="min-w-48 rounded-lg hover:opacity-85 transform transition-transform duration-400 hover:scale-110"
                         :src="program.photo"
                         :alt="program.name + ' logo'"
                 /></a>
@@ -22,7 +22,7 @@
     </div>
 </template>
 <script>
-import { Autoplay, Pagination, A11y } from "swiper/modules";
+import { Autoplay, A11y } from "swiper/modules";
 
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from "swiper/vue";
@@ -30,7 +30,7 @@ import { Swiper, SwiperSlide } from "swiper/vue";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/autoplay";
-import "swiper/css/pagination";
+
 const programes = [
     {
         name: "String",
@@ -69,7 +69,7 @@ export default {
             onSwiper,
             onSlideChange,
             programes,
-            modules: [Autoplay, Pagination, A11y],
+            modules: [Autoplay, A11y],
         };
     },
 };

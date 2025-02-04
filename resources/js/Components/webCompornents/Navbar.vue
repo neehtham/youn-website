@@ -42,11 +42,13 @@ export default {
         <div class="bg-white shadow">
             <div class="px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between h-16">
-                    <img
-                        class="h-14 w-auto mt-1"
-                        src="/images/logo.png"
-                        alt="Logo"
-                    />
+                    <a href="/">
+                        <img
+                            class="h-14 w-auto mt-1"
+                            src="/images/logo.png"
+                            alt="Logo"
+                        />
+                    </a>
                     <div class="xl:hidden">
                         <button
                             @click="isMenuOpen = !isMenuOpen"

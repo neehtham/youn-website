@@ -4,7 +4,6 @@
             :modules="modules"
             :slides-per-view="1"
             :space-between="50"
-            :pagination="{ clickable: true }"
             :scrollbar="{ draggable: true }"
             :autoplay="{ delay: 2000, disableOnInteraction: false }"
             @swiper="onSwiper"
@@ -12,7 +11,11 @@
         >
             <swiper-slide v-for="event in eventes" :key="event.name">
                 <div class="flex flex-col gap-5 text-left xl:flex-row">
-                    <img class="w-full xl:w-64" :src="event.photo" alt="Logo" />
+                    <img
+                        class="w-full rounded-lg xl:w-64"
+                        :src="event.photo"
+                        alt="Logo"
+                    />
                     <div class="flex flex-col gap-2 items-center pt-5">
                         <p class="text-3xl text-blue font-extrabold w-full">
                             {{ event.name }}
@@ -27,7 +30,7 @@
     </div>
 </template>
 <script>
-import { Autoplay, Pagination, A11y } from "swiper/modules";
+import { Autoplay } from "swiper/modules";
 
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from "swiper/vue";
@@ -36,7 +39,7 @@ import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/css";
 import "swiper/css/autoplay";
 import "swiper/css/pagination";
-const programes = [
+const eventes = [
     {
         name: "String",
         description:
@@ -71,8 +74,8 @@ export default {
         return {
             onSwiper,
             onSlideChange,
-            programes,
-            modules: [Autoplay, Pagination, A11y],
+            eventes,
+            modules: [Autoplay],
         };
     },
 };

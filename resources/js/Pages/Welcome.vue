@@ -18,13 +18,12 @@ import HighlightCarrosell from "@/Components/webCompornents/highlightCarrosell.v
                     </p>
                 </a>
             </div>
-            <div class="p-12 lx:flex">
+            <div class="p-12 xl:block hidden">
                 <EventHighlight></EventHighlight>
             </div>
-            <!-- <div class="p-12 flex lx:hidden">
+            <div class="p-12 flex xl:hidden">
                 <HighlightCarrosell></HighlightCarrosell>
-            </div> -->
-            <!-- TODO:FIXME: Uncomment this line -->
+            </div>
         </div>
     </MainLayout>
 </template>
