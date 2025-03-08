@@ -5,51 +5,34 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import Carrosell from "@/Components/webCompornents/programsCarrosell.vue";
-</script>
-<script lang="ts">
-const programes = [
-    {
-        name: "String",
-        photo: "/images/program_logos/string.png",
-        id: 1,
+
+const props = defineProps({
+    events: {
+        type: Object,
+        required: true,
     },
-    {
-        name: "YKOTR",
-        photo: "/images/program_logos/ykotr.png",
-        id: 2,
-    },
-    {
-        name: "SYG",
-        photo: "/images/program_logos/syg.png",
-        id: 3,
-    },
-    {
-        name: "Unified",
-        photo: "/images/program_logos/unified.png",
-        id: 4,
-    },
-];
+});
 </script>
 
 <template>
     <MainLayout>
         <div class="hidden flex-col items-center mt-3 xl:flex">
             <div
-                v-for="program in programes"
-                :key="program.name"
+                v-for="program in props.events"
+                :key="program.title"
                 class="relative m-3"
             >
                 <a :href="'/Programes/' + program.id">
                     <img
                         class="min-w-48 rounded-lg hover:opacity-85 transform transition-transform duration-400 hover:scale-105"
-                        :src="program.photo"
-                        :alt="program.name + ' logo'"
+                        :src="`/storage/${program.coverPhoto}`"
+                        :alt="program.title + ' logo'"
                     />
                 </a>
             </div>
         </div>
         <div class="flex-col items-center mt-3 xl:hidden">
-            <Carrosell></Carrosell>
+            <Carrosell :events="props.events"></Carrosell>
         </div>
     </MainLayout>
 </template>

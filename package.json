@@ -26,8 +26,12 @@
         "@fortawesome/free-brands-svg-icons": "^6.7.2",
         "@primevue/themes": "^4.2.5",
         "animate.css": "^4.1.1",
+        "filepond": "^4.32.7",
+        "filepond-plugin-file-validate-type": "^1.2.9",
+        "filepond-plugin-image-preview": "^4.6.12",
         "primeicons": "^7.0.0",
         "primevue": "^4.2.5",
-        "swiper": "^11.2.1"
+        "swiper": "^11.2.1",
+        "vue-filepond": "^7.0.4"
     }
 }
