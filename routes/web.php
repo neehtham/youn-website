@@ -22,13 +22,15 @@ Route::middleware('auth')->group(function () {
     Route::get('/Programes/create', [EventController::class, 'create'])->name('event.create');
     Route::post('/Programes/create', [EventController::class, 'store'])->name('event.store');
     Route::post('uploads/process', [UploadController::class, 'process'])->name('uploads.process');
+    Route::delete('uploads/process', [UploadController::class, 'deleteTemp'])->name('uploads.process');
     Route::post('uploads/save', [UploadController::class, 'save'])->name('uploads.save');
+    Route::get('/Programes/edit', [EventController::class, 'view'])->name('event.view');
     Route::get('/Programes/edit/{event}', [EventController::class, 'edit'])->name('event.edit');
-    Route::patch('/Programes/update/{event}', [EventController::class, 'update'])->name('event.update');
+    Route::put('/Programes/edit/{event}', [UploadController::class, 'update'])->name('event.update');
     Route::delete('/Programes/edit{event}', [EventController::class, 'destroy'])->name('event.delete');
 });
 
-Route::get('/Programes/index', [EventController::class, 'index'])->name('event.index');
+Route::get('/Programes', [EventController::class, 'index'])->name('event.index');
 Route::get('/Programes/{event}', [EventController::class, 'show'])->name('event.show');
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

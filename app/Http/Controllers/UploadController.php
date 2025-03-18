@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Http\File;
+use Illuminate\Support\Facades\Validator;
 
 final class UploadController extends Controller
 {
@@ -33,9 +33,22 @@ final class UploadController extends Controller
             ? $request->file($requestKey)[0]
             : $request->file($requestKey);
 
+        $validator = Validator::make($request->all(), [
+            $requestKey => 'required|file|mimes:jpeg,png,jpg|max:2048'
+        ]);
+
+        if ($validator->fails()) {
+            abort(422, $validator->errors()->first());
+        }
         return $file->store(
             path: '/tmp/' . now()->timestamp . '-' . Str::random(8)
         );
+    }
+    public function deleteTemp(Request $request)
+    {
+        $path = $request->get('path');
+        Storage::delete($path);
+        return response()->json(['message' => 'File deleted']);
     }
     public function save(Request $request)
     {
@@ -47,7 +60,6 @@ final class UploadController extends Controller
             'Photo1' => "required",
             'Photo2' => "required"
         ]);
-        //Todo: display dose in index and show
         // Copy the file from a temporary location to a permanent location.
         $tempfiles = [
             'coverPhoto' => $request->coverPhoto,
@@ -68,5 +80,38 @@ final class UploadController extends Controller
         return redirect()
             ->route('dashboard')
             ->with('success', 'new event has created');
+    }
+    public function update(Request $request, Event $event)
+    {
+        $request->validate([
+            'title' => 'required|string',
+            'paragraph1' => 'required|string',
+            'paragraph2' => 'required|string',
+            'coverPhoto' => "nullable",
+            'Photo1' => "nullable",
+            'Photo2' => "nullable"
+        ]);
+        $tempfiles = [
+            'coverPhoto' => $request->coverPhoto,
+            'Photo1' => $request->Photo1,
+            'Photo2' => $request->Photo2
+        ];
+        $new = [
+            'title' => $request->title,
+            'paragraph1' => $request->paragraph1,
+            'paragraph2' => $request->paragraph2
+        ];
+        foreach ($tempfiles as $filetype => $tempfile) {
+            if ($tempfile !== null) {
+                $permanentPath = str_replace('tmp/', '/storage/public/photos', $tempfile);
+                Storage::move($tempfile, $permanentPath);
+                $new[$filetype] = $permanentPath;
+            }
+        };
+
+        $event->update($new);
+        return redirect()
+            ->route('dashboard')
+            ->with('success', 'new event has updated');
     }
 }

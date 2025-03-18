@@ -6,5 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model
 {
-    protected $hidden = [];
+    protected $fillable = [
+        'title',
+        'paragraph1',
+        'paragraph2',
+        'coverPhoto',
+        'Photo1',
+        'Photo2',
+    ];
 }

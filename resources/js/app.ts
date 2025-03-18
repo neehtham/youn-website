@@ -9,6 +9,8 @@ import { createApp, DefineComponent, h } from "vue";
 import { ZiggyVue } from "../../vendor/tightenco/ziggy";
 import PrimeVue from "primevue/config";
 import Aura from "@primevue/themes/aura";
+import Toast from "primevue/toast";
+import ToastService from "primevue/toastservice";
 import Swiper from "swiper";
 import { Navigation, Pagination } from "swiper/modules";
 
@@ -38,9 +40,7 @@ createInertiaApp({
                 },
             })
             .use(ZiggyVue)
+            .use(ToastService)
             .mount(el);
-    },
-    progress: {
-        color: "#4B5563",
     },
 });

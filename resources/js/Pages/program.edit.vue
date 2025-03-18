@@ -6,12 +6,13 @@ import vueFilePond from "vue-filepond";
 
 import "filepond/dist/filepond.min.css";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css";
+import { Button } from "primevue";
 
 // Create component with plugins
 const FilePond = vueFilePond();
-
-const photo = ref();
 const pond = ref(null);
+
+const acceptedFileTypes = ["image/jpeg", "image/png"];
 
 // Get CSRF token at setup time
 const csrfToken =
@@ -22,11 +23,16 @@ const csrfToken =
 const handleFilePondInit = () => {
     console.log("FilePond has initialized");
 };
-
+const props = defineProps({
+    event: {
+        type: Object,
+        required: true,
+    },
+});
 const form = useForm({
-    title: "",
-    paragraph1: "",
-    paragraph2: "",
+    title: props.event.title,
+    paragraph1: props.event.paragraph1,
+    paragraph2: props.event.paragraph2,
     coverPhoto: null,
     Photo1: null,
     Photo2: null,
@@ -53,9 +59,12 @@ const handleProcessFile = (error: any, file: any, fieldName: string) => {
     <Head title="Dashboard" />
 
     <AuthenticatedLayout>
-        <form class="mx-32 mt-5" @submit.prevent="form.post('/uploads/save')">
-            <div class="space-y-12">
-                <div class="sm:col-span-4">
+        <form
+            class="mx-32 mt-5"
+            @submit.prevent="form.put(route('event.update', props.event.id))"
+        >
+            <div>
+                <div>
                     <label
                         for="event"
                         class="block text-sm/6 font-medium text-gray-900"
@@ -71,7 +80,7 @@ const handleProcessFile = (error: any, file: any, fieldName: string) => {
                         />
                     </div>
                 </div>
-                <div class="col-span-full">
+                <div>
                     <label
                         for="pragraph1"
                         class="block text-sm/6 font-medium text-gray-900"
@@ -87,7 +96,7 @@ const handleProcessFile = (error: any, file: any, fieldName: string) => {
                         />
                     </div>
                 </div>
-                <div class="col-span-full">
+                <div>
                     <label
                         for="pragraph2"
                         class="block text-sm/6 font-medium text-gray-900"
@@ -103,7 +112,6 @@ const handleProcessFile = (error: any, file: any, fieldName: string) => {
                         />
                     </div>
                 </div>
-
                 <div class="flex flex-row gap-x-6 w-full justify-evenly mt-6">
                     <div class="w-80">
                         <label
@@ -115,7 +123,7 @@ const handleProcessFile = (error: any, file: any, fieldName: string) => {
                             ref="pond"
                             label-idle="Drop files here..."
                             :allow-multiple="false"
-                            accepted-file-types="image/jpeg, image/png"
+                            :accepted-file-types="acceptedFileTypes"
                             :server="{
                                 url: '/uploads/process',
                                 headers: {
@@ -136,7 +144,7 @@ const handleProcessFile = (error: any, file: any, fieldName: string) => {
                             ref="pond"
                             label-idle="Drop files here..."
                             :allow-multiple="false"
-                            accepted-file-types="image/jpeg, image/png"
+                            :accepted-file-types="acceptedFileTypes"
                             :server="{
                                 url: '/uploads/process',
                                 headers: {
@@ -157,7 +165,7 @@ const handleProcessFile = (error: any, file: any, fieldName: string) => {
                             ref="pond"
                             label-idle="Drop files here..."
                             :allow-multiple="false"
-                            accepted-file-types="image/jpeg, image/png"
+                            :accepted-file-types="acceptedFileTypes"
                             :server="{
                                 url: '/uploads/process',
                                 headers: {
@@ -183,6 +191,17 @@ const handleProcessFile = (error: any, file: any, fieldName: string) => {
                 >
                     Save
                 </button>
+                <Button
+                    @click.prevent="
+                        () =>
+                            $inertia.delete(
+                                route('event.delete', props.event.id)
+                            )
+                    "
+                    severity="danger"
+                >
+                    Delete
+                </Button>
             </div>
         </form>
     </AuthenticatedLayout>

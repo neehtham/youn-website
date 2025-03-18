@@ -18,7 +18,6 @@ const props = defineProps({
                 >
                     {{ props.event.title }}
                 </h1>
-                <!-- <button class="mttto--blue-600underline">Go Back</button> -->
             </div>
 
             <div class="mt-4">
