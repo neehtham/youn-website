@@ -33,7 +33,7 @@ class EventController extends Controller
     }
     public function destroy(Event $event)
     {
-        // $event->delete();
+        $event->delete();
         return Redirect::route('dashboard')->with('success', 'The event Has been deleted');
     }
 }

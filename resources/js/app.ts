@@ -9,18 +9,17 @@ import { createApp, DefineComponent, h } from "vue";
 import { ZiggyVue } from "../../vendor/tightenco/ziggy";
 import PrimeVue from "primevue/config";
 import Aura from "@primevue/themes/aura";
-import Toast from "primevue/toast";
 import ToastService from "primevue/toastservice";
 import Swiper from "swiper";
 import { Navigation, Pagination } from "swiper/modules";
 
-const appName = import.meta.env.VITE_APP_NAME || "Laravel";
+const appName = "Youth Union";
 const swiper = new Swiper(".swiper", {
     modules: [Navigation, Pagination],
 });
 
 createInertiaApp({
-    title: (title) => `${title} - ${appName}`,
+    title: (title) => `${appName}`,
     resolve: (name) =>
         resolvePageComponent(
             `./Pages/${name}.vue`,

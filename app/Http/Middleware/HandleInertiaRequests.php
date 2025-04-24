@@ -38,6 +38,7 @@ class HandleInertiaRequests extends Middleware
                 'success' => session('success'),
                 'error' => session('error'),
             ],
+            'showLoading' => (bool) session()->get('showLoading', false),
         ];
     }
 }

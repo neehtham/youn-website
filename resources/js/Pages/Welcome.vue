@@ -2,12 +2,15 @@
 import EventHighlight from "@/Components/webCompornents/eventHighlight.vue";
 import MainLayout from "@/Layouts/MainLayout.vue";
 import HighlightCarrosell from "@/Components/webCompornents/highlightCarrosell.vue";
+import mainCarrosell from "@/Components/webCompornents/mainCarrosell.vue";
 </script>
 
 <template class="">
     <MainLayout>
         <div class="grow px-12 max-w-6xl pt-12">
-            <!-- TODO: Add slideshow  -->
+            <div class="flex justify-center items-center">
+                <mainCarrosell></mainCarrosell>
+            </div>
             <div
                 class="flex pt-5 justify-between w-full font-hadings font-bold"
             >
@@ -18,10 +21,10 @@ import HighlightCarrosell from "@/Components/webCompornents/highlightCarrosell.v
                     </p>
                 </a>
             </div>
-            <div class="p-12 xl:block hidden">
+            <div class="p-12 xl:block hidden justify-center items-center">
                 <EventHighlight></EventHighlight>
             </div>
-            <div class="p-12 flex xl:hidden">
+            <div class="p-12 flex xl:hidden justify-center items-center">
                 <HighlightCarrosell></HighlightCarrosell>
             </div>
         </div>

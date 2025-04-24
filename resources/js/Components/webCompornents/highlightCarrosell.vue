@@ -1,34 +1,3 @@
-<template>
-    <div class="max-w-lg p-8">
-        <swiper
-            :modules="modules"
-            :slides-per-view="1"
-            :space-between="50"
-            :scrollbar="{ draggable: true }"
-            :autoplay="{ delay: 2000, disableOnInteraction: false }"
-            @swiper="onSwiper"
-            @slideChange="onSlideChange"
-        >
-            <swiper-slide v-for="event in eventes" :key="event.name">
-                <div class="flex flex-col gap-5 text-left xl:flex-row">
-                    <img
-                        class="w-full rounded-lg xl:w-64"
-                        :src="event.photo"
-                        alt="Logo"
-                    />
-                    <div class="flex flex-col gap-2 items-center pt-5">
-                        <p class="text-3xl text-blue font-extrabold w-full">
-                            {{ event.name }}
-                        </p>
-                        <p class="text-xl text-blue font-extrabold">
-                            {{ event.description }}
-                        </p>
-                    </div>
-                </div>
-            </swiper-slide>
-        </swiper>
-    </div>
-</template>
 <script>
 import { Autoplay } from "swiper/modules";
 
@@ -80,3 +49,34 @@ export default {
     },
 };
 </script>
+<template>
+    <div class="max-w-lg p-8">
+        <swiper
+            :modules="modules"
+            :slides-per-view="1"
+            :space-between="50"
+            :scrollbar="{ draggable: true }"
+            :autoplay="{ delay: 2000, disableOnInteraction: false }"
+            @swiper="onSwiper"
+            @slideChange="onSlideChange"
+        >
+            <swiper-slide v-for="event in eventes" :key="event.name">
+                <div class="flex flex-col gap-5 text-left xl:flex-row">
+                    <img
+                        class="w-full rounded-lg xl:w-64"
+                        :src="event.photo"
+                        alt="Logo"
+                    />
+                    <div class="flex flex-col gap-2 items-center pt-5">
+                        <p class="text-3xl text-blue font-extrabold w-full">
+                            {{ event.name }}
+                        </p>
+                        <p class="text-xl text-blue font-extrabold">
+                            {{ event.description }}
+                        </p>
+                    </div>
+                </div>
+            </swiper-slide>
+        </swiper>
+    </div>
+</template>
