@@ -16,7 +16,7 @@ const props = defineProps({
 
 <template>
     <MainLayout>
-        <div class="hidden flex-col items-center mt-3 xl:flex">
+        <div class="flex-col items-center mt-3 md:max-w-md">
             <div
                 v-for="program in props.events"
                 :key="program.title"
@@ -31,8 +31,8 @@ const props = defineProps({
                 </a>
             </div>
         </div>
-        <div class="flex-col items-center mt-3 xl:hidden">
+        <!-- <div class="flex-col items-center mt-3 xl:hidden">
             <Carrosell :events="props.events"></Carrosell>
-        </div>
+        </div> -->
     </MainLayout>
 </template>

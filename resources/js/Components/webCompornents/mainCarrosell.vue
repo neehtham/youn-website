@@ -52,7 +52,7 @@ export default {
 };
 </script>
 <template>
-    <div class="xl:max-w-7xl max-w-lg p-8 items-center">
+    <div class="w-full xl:max-w-7xl max-w-md p-8 items-center">
         <swiper
             :modules="modules"
             :slides-per-view="1"
@@ -73,7 +73,7 @@ export default {
                             alt="Logo"
                         />
                         <p
-                            class="absolute bottom-2 right-2 text-4xl font-hadings text-black font-bold drop-shadow-[0_0px_10px_rgba(255,255,255,1)]"
+                            class="absolute bottom-2 right-2 text-2xl sm:text-4xl font-hadings text-black font-bold drop-shadow-[0_0px_10px_rgba(255,255,255,1)]"
                         >
                             {{ event.name }}
                         </p>

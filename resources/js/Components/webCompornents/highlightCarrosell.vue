@@ -50,7 +50,7 @@ export default {
 };
 </script>
 <template>
-    <div class="max-w-lg p-8">
+    <div class="max-w-md xl:max-w-lg px-8">
         <swiper
             :modules="modules"
             :slides-per-view="1"
@@ -67,7 +67,7 @@ export default {
                         :src="event.photo"
                         alt="Logo"
                     />
-                    <div class="flex flex-col gap-2 items-center pt-5">
+                    <div class="flex flex-col gap-2 items-center pb-4">
                         <p class="text-3xl text-blue font-extrabold w-full">
                             {{ event.name }}
                         </p>

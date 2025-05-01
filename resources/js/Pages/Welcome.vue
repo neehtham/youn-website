@@ -7,7 +7,7 @@ import mainCarrosell from "@/Components/webCompornents/mainCarrosell.vue";
 
 <template class="">
     <MainLayout>
-        <div class="grow px-12 max-w-6xl pt-12">
+        <div class="hidden grow px-12 max-w-6xl pt-12 xl:block">
             <div class="flex justify-center items-center">
                 <mainCarrosell></mainCarrosell>
             </div>
@@ -24,8 +24,21 @@ import mainCarrosell from "@/Components/webCompornents/mainCarrosell.vue";
             <div class="p-12 xl:block hidden justify-center items-center">
                 <EventHighlight></EventHighlight>
             </div>
-            <div class="p-12 flex xl:hidden justify-center items-center">
-                <HighlightCarrosell></HighlightCarrosell>
+        </div>
+        <div class="xl:hidden max-w-md">
+            <div class="max-w-xl mx-auto w-full justify-center items-center">
+                <div class="flex justify-center">
+                    <mainCarrosell />
+                </div>
+                <div
+                    class="flex justify-center pt-2 font-hadings font-bold max-w-s m-2"
+                >
+                    <p class="text-3xl text-blue">Our Programes</p>
+                    <a href="/Programes"> </a>
+                </div>
+                <div class="flex xl:hidden justify-center items-center">
+                    <HighlightCarrosell />
+                </div>
             </div>
         </div>
     </MainLayout>
