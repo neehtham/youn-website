@@ -64,6 +64,13 @@ onMounted(() => {
                         @click.prevent="() => $inertia.get(route('event.view'))"
                         >Edit an event</Button
                     >
+                    <Button
+                        @click.prevent="
+                            () => $inertia.get(route('profile.show'))
+                        "
+                        class="m-6"
+                        >Users</Button
+                    >
                 </div>
             </div>
         </div>
