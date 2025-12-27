@@ -53,7 +53,7 @@ console.log(props.events);
                             () =>
                                 $inertia.get(
                                     route('event.edit', {
-                                        id: slotProps.data.id,
+                                        id: slotProps.data.slug,
                                     })
                                 )
                         "

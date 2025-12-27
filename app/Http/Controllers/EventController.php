@@ -15,7 +15,7 @@ class EventController extends Controller
     }
     public function index()
     {
-        $events = Event::get(['id', 'coverPhoto']);
+        $events = Event::get(['id', 'slug', 'title', 'coverPhoto']);
         return inertia::render('programes', ['events' => $events]);
     }
     public function show(Event $event)

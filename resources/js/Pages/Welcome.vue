@@ -3,6 +3,13 @@ import EventHighlight from "@/Components/webCompornents/eventHighlight.vue";
 import MainLayout from "@/Layouts/MainLayout.vue";
 import HighlightCarrosell from "@/Components/webCompornents/highlightCarrosell.vue";
 import mainCarrosell from "@/Components/webCompornents/mainCarrosell.vue";
+
+const props = defineProps({
+    events: {
+        type: Array,
+        required: true,
+    },
+});
 </script>
 
 <template class="">
@@ -22,7 +29,7 @@ import mainCarrosell from "@/Components/webCompornents/mainCarrosell.vue";
                 </a>
             </div>
             <div class="p-12 xl:block hidden justify-center items-center">
-                <EventHighlight></EventHighlight>
+                <EventHighlight :events="props.events"></EventHighlight>
             </div>
         </div>
         <div class="xl:hidden max-w-md">
@@ -37,7 +44,7 @@ import mainCarrosell from "@/Components/webCompornents/mainCarrosell.vue";
                     <a href="/Programes"> </a>
                 </div>
                 <div class="flex xl:hidden justify-center items-center">
-                    <HighlightCarrosell />
+                    <HighlightCarrosell :events="props.events" />
                 </div>
             </div>
         </div>

@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 import { Autoplay } from "swiper/modules";
 
 // Import Swiper Vue.js components
@@ -8,42 +8,39 @@ import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/css";
 import "swiper/css/autoplay";
 import "swiper/css/pagination";
-const eventes = [
-    {
-        name: "String",
-        description:
-            "Our very first own program launched in 2024 with a total of 1 event held and many more planned and ready to be held.",
-        photo: "/images/program_logos/string.png",
-    },
-    {
-        name: "YKOTR",
-        description:
-            "The physical activity held monthly to promote a healthy lifestyle and bonding within our volunteer group.",
-        photo: "/images/program_logos/ykotr.png",
-    },
-    {
-        name: "SYG",
-        description:
-            "An event started by a collaboration between YOUN and Al-Hijrah held every year in Ramadan.",
-        photo: "/images/program_logos/syg.png",
-    },
-];
+
 export default {
     components: {
         Swiper,
         SwiperSlide,
     },
-    setup() {
-        const onSwiper = (swiper) => {
+    props: {
+        events: {
+            type: Array as () => any[],
+            required: true,
+        },
+    },
+    setup(props) {
+        const onSwiper = (swiper: any) => {
             console.log(swiper);
         };
         const onSlideChange = () => {
             console.log("slide change");
         };
+
+        const getPhoto = (slug: string) => {
+            const logos: Record<string, string> = {
+                string: "/images/program_logos/string.png",
+                ykotr: "/images/program_logos/ykotr.png",
+                syg: "/images/program_logos/syg.png",
+            };
+            return logos[slug] || "/images/events/placeholder.png";
+        };
+
         return {
             onSwiper,
             onSlideChange,
-            eventes,
+            getPhoto,
             modules: [Autoplay],
         };
     },
@@ -60,19 +57,25 @@ export default {
             @swiper="onSwiper"
             @slideChange="onSlideChange"
         >
-            <swiper-slide v-for="event in eventes" :key="event.name">
+            <swiper-slide v-for="event in events" :key="event.slug">
                 <div class="flex flex-col gap-5 text-left xl:flex-row">
-                    <img
-                        class="w-full rounded-lg xl:w-64"
-                        :src="event.photo"
-                        alt="Logo"
-                    />
+                    <a :href="'/Programes/' + event.slug">
+                        <img
+                            class="w-full rounded-lg xl:w-64"
+                            :src="getPhoto(event.slug)"
+                            alt="Logo"
+                        />
+                    </a>
                     <div class="flex flex-col gap-2 items-center pb-4">
-                        <p class="text-3xl text-blue font-extrabold w-full">
-                            {{ event.name }}
-                        </p>
+                        <a :href="'/Programes/' + event.slug" class="w-full">
+                            <p
+                                class="text-3xl text-blue font-extrabold hover:underline"
+                            >
+                                {{ event.title || event.name }}
+                            </p>
+                        </a>
                         <p class="text-xl text-blue font-extrabold">
-                            {{ event.description }}
+                            {{ event.excerpt || event.description }}
                         </p>
                     </div>
                 </div>

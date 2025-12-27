@@ -22,7 +22,7 @@ const props = defineProps({
                 :key="program.title"
                 class="relative m-3"
             >
-                <a :href="'/Programes/' + program.id">
+                <a :href="'/Programes/' + program.slug">
                     <img
                         class="min-w-48 rounded-lg hover:opacity-85 transform transition-transform duration-400 hover:scale-105"
                         :src="`/storage/${program.coverPhoto}`"

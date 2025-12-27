@@ -9,7 +9,8 @@ use Inertia\Inertia;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
-        'appName' => 'Youth Union'
+        'appName' => 'Youth Union',
+        'events' => \App\Models\Event::all(['title', 'slug', 'excerpt']),
     ]);
 });
 

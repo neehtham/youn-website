@@ -10,8 +10,8 @@
             @swiper="onSwiper"
             @slideChange="onSlideChange"
         >
-            <swiper-slide v-for="program in events" :key="program.title">
-                <a :href="'/Programes/' + program.id">
+            <swiper-slide v-for="program in events" :key="program.slug">
+                <a :href="'/Programes/' + program.slug">
                     <img
                         class="min-w-48 rounded-lg hover:opacity-85 transform transition-transform duration-400 hover:scale-110"
                         :src="`/storage/${program.coverPhoto}`"
