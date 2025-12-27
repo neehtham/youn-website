@@ -17,4 +17,13 @@ export default defineConfig({
             },
         }),
     ],
+    server: {
+        host: '127.0.0.1', // or 'localhost'
+        port: 5173,
+        strictPort: true,
+        cors: true, // allow all origins OR
+        headers: {
+            'Access-Control-Allow-Origin':"*",
+        }
+    }
 });
