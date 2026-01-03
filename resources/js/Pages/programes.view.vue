@@ -57,8 +57,7 @@ console.log(props.events);
                                     })
                                 )
                         "
-                        >Edit</Button
-                    >
+                        >Edit</Button>
                 </template>
             </Column>
         </DataTable>
