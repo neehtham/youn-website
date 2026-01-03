@@ -12,6 +12,13 @@ const props = defineProps({
         required: true,
     },
 });
+
+const getImageUrl = (path: string | null) => {
+    if (!path) return "";
+    if (path.startsWith("http")) return path;
+    if (path.startsWith("/")) return path;
+    return `/storage/${path}`;
+};
 console.log(props.events);
 </script>
 
@@ -22,8 +29,8 @@ console.log(props.events);
             <Column header="Cover Photo">
                 <template #body="slotProps">
                     <img
-                        :src="`/storage/${slotProps.data.coverPhoto}`"
-                        :alt="slotProps.data"
+                        :src="getImageUrl(slotProps.data.coverPhoto)"
+                        :alt="slotProps.data.title"
                         class="w-24 rounded"
                     />
                 </template>
@@ -31,8 +38,8 @@ console.log(props.events);
             <Column header="Photo1">
                 <template #body="slotProps">
                     <img
-                        :src="`/storage/${slotProps.data.Photo1}`"
-                        :alt="slotProps.data"
+                        :src="getImageUrl(slotProps.data.Photo1)"
+                        :alt="slotProps.data.title"
                         class="w-24 rounded"
                     />
                 </template>
@@ -40,8 +47,8 @@ console.log(props.events);
             <Column header="Photo2">
                 <template #body="slotProps">
                     <img
-                        :src="`/storage/${slotProps.data.Photo2}`"
-                        :alt="slotProps.data"
+                        :src="getImageUrl(slotProps.data.Photo2)"
+                        :alt="slotProps.data.title"
                         class="w-24 rounded"
                     />
                 </template>

@@ -41,13 +41,14 @@ final class UploadController extends Controller
             abort(422, $validator->errors()->first());
         }
         return $file->store(
-            path: '/tmp/' . now()->timestamp . '-' . Str::random(8)
+            path: 'tmp/' . now()->timestamp . '-' . Str::random(8),
+            options: ['disk' => 'public']
         );
     }
     public function deleteTemp(Request $request)
     {
         $path = $request->get('path');
-        Storage::delete($path);
+        Storage::disk('public')->delete($path);
         return response()->json(['message' => 'File deleted']);
     }
     public function save(Request $request)
@@ -72,8 +73,8 @@ final class UploadController extends Controller
         $event->paragraph2 = $request->paragraph2;
 
         foreach ($tempfiles as $filetype => $tempfile) {
-            $permanentPath = str_replace('tmp/', '/storage/public/photos', $tempfile);
-            Storage::move($tempfile, $permanentPath);
+            $permanentPath = str_replace('tmp/', 'photos/', $tempfile);
+            Storage::disk('public')->move($tempfile, $permanentPath);
             $event->$filetype = $permanentPath;
         };
         $event->save();
@@ -103,8 +104,8 @@ final class UploadController extends Controller
         ];
         foreach ($tempfiles as $filetype => $tempfile) {
             if ($tempfile !== null) {
-                $permanentPath = str_replace('tmp/', '/storage/public/photos', $tempfile);
-                Storage::move($tempfile, $permanentPath);
+                $permanentPath = str_replace('tmp/', 'photos/', $tempfile);
+                Storage::disk('public')->move($tempfile, $permanentPath);
                 $new[$filetype] = $permanentPath;
             }
         };

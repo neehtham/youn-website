@@ -8,17 +8,17 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
+    return Inertia::render('web/Welcome', [
         'appName' => 'Youth Union',
         'events' => \App\Models\Event::all(['title', 'slug', 'excerpt']),
     ]);
 });
 
 Route::get('/About', function () {
-    return Inertia::render('About');
+    return Inertia::render('web/About');
 });
 Route::get('/Donate', function () {
-    return Inertia::render('Donate');
+    return Inertia::render('web/Donate');
 });
 
 Route::middleware('auth')->group(function () {
@@ -36,7 +36,7 @@ Route::middleware('auth')->group(function () {
 Route::get('/Programes', [EventController::class, 'index'])->name('event.index');
 Route::get('/Programes/{event}', [EventController::class, 'show'])->name('event.show');
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+    return Inertia::render('portal/Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {

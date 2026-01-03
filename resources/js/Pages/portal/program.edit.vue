@@ -61,7 +61,7 @@ const handleProcessFile = (error: any, file: any, fieldName: string) => {
     <AuthenticatedLayout>
         <form
             class="mx-32 mt-5"
-            @submit.prevent="form.put(route('event.update', props.event.id))"
+            @submit.prevent="form.put(route('event.update', props.event.slug))"
         >
             <div>
                 <div>
@@ -195,7 +195,7 @@ const handleProcessFile = (error: any, file: any, fieldName: string) => {
                     @click.prevent="
                         () =>
                             $inertia.delete(
-                                route('event.delete', props.event.id)
+                                route('event.delete', props.event.slug)
                             )
                     "
                     severity="danger"

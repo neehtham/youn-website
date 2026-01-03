@@ -11,25 +11,25 @@ class EventController extends Controller
 {
     public function create()
     {
-        return Inertia::render('create');
+        return Inertia::render('portal/create');
     }
     public function index()
     {
         $events = Event::get(['id', 'slug', 'title', 'coverPhoto']);
-        return inertia::render('programes', ['events' => $events]);
+        return inertia::render('web/programes', ['events' => $events]);
     }
     public function show(Event $event)
     {
-        return inertia::render('program', ['event' => $event]);
+        return inertia::render('web/program', ['event' => $event]);
     }
     public function view()
     {
         $events = Event::get();
-        return inertia::render('programes.view', ['events' => $events]);
+        return inertia::render('portal/programes.view', ['events' => $events]);
     }
     public function edit(Event $event)
     {
-        return inertia::render('program.edit', ['event' => $event]);
+        return inertia::render('portal/program.edit', ['event' => $event]);
     }
     public function destroy(Event $event)
     {
