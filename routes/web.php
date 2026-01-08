@@ -25,7 +25,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/Programes/create', [EventController::class, 'create'])->name('event.create');
     Route::post('/Programes/create', [EventController::class, 'store'])->name('event.store');
     Route::post('uploads/process', [UploadController::class, 'process'])->name('uploads.process');
-    Route::delete('uploads/process', [UploadController::class, 'deleteTemp'])->name('uploads.process');
+    Route::delete('uploads/process', [UploadController::class, 'deleteTemp'])->name('uploads.deleteTemp');
     Route::post('uploads/save', [UploadController::class, 'save'])->name('uploads.save');
     Route::get('/Programes/edit', [EventController::class, 'view'])->name('event.view');
     Route::get('/Programes/edit/{event}', [EventController::class, 'edit'])->name('event.edit');
