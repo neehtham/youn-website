@@ -125,7 +125,8 @@ const handleProcessFile = (error: any, file: any, fieldName: string) => {
                             :allow-multiple="false"
                             :accepted-file-types="acceptedFileTypes"
                             :server="{
-                                url: '/uploads/process',
+                                process: '/uploads/process',
+                                revert: '/uploads/process',
                                 headers: {
                                     'X-CSRF-TOKEN': csrfToken,
                                 },
@@ -146,7 +147,8 @@ const handleProcessFile = (error: any, file: any, fieldName: string) => {
                             :allow-multiple="false"
                             :accepted-file-types="acceptedFileTypes"
                             :server="{
-                                url: '/uploads/process',
+                                process: '/uploads/process',
+                                revert: '/uploads/process',
                                 headers: {
                                     'X-CSRF-TOKEN': csrfToken,
                                 },
@@ -167,7 +169,8 @@ const handleProcessFile = (error: any, file: any, fieldName: string) => {
                             :allow-multiple="false"
                             :accepted-file-types="acceptedFileTypes"
                             :server="{
-                                url: '/uploads/process',
+                                process: '/uploads/process',
+                                revert: '/uploads/process',
                                 headers: {
                                     'X-CSRF-TOKEN': csrfToken,
                                 },

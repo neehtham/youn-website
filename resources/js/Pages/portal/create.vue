@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Head, useForm } from "@inertiajs/vue3";
-import { ref } from "vue";
+import {Head, useForm} from "@inertiajs/vue3";
+import {ref, computed} from "vue";
 import vueFilePond from "vue-filepond";
 
 import "filepond/dist/filepond.min.css";
@@ -25,12 +25,15 @@ const handleFilePondInit = () => {
 
 const form = useForm({
     title: "",
+    slug: "",
     paragraph1: "",
     paragraph2: "",
     coverPhoto: null,
     Photo1: null,
     Photo2: null,
 });
+
+// form.slug = computed(() => {})
 
 const handleProcessFile = (error: any, file: any, fieldName: string) => {
     if (!error) {
@@ -50,7 +53,7 @@ const handleProcessFile = (error: any, file: any, fieldName: string) => {
 </script>
 
 <template>
-    <Head title="Dashboard" />
+    <Head title="Dashboard"/>
 
     <AuthenticatedLayout>
         <form class="mx-32 mt-5" @submit.prevent="form.post('/uploads/save')">
@@ -59,8 +62,8 @@ const handleProcessFile = (error: any, file: any, fieldName: string) => {
                     <label
                         for="event"
                         class="block text-sm/6 font-medium text-gray-900"
-                        >Name of event</label
-                    >
+                    >Name of event
+                    </label>
                     <div class="mt-2">
                         <input
                             type="text"
@@ -70,12 +73,21 @@ const handleProcessFile = (error: any, file: any, fieldName: string) => {
                             class="block min-w-0 grow py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6 rounded-lg"
                         />
                     </div>
+                    <div class="mt-2">
+                        <input
+                            type="text"
+                            name="slug"
+                            id="slug"
+                            v-model="form.slug"
+                            class="block min-w-0 grow py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6 rounded-lg"
+                        />
+                    </div>
                 </div>
                 <div class="col-span-full">
                     <label
                         for="pragraph1"
                         class="block text-sm/6 font-medium text-gray-900"
-                        >First Pragraph</label
+                    >First Pragraph</label
                     >
                     <div class="mt-2">
                         <textarea
@@ -91,7 +103,7 @@ const handleProcessFile = (error: any, file: any, fieldName: string) => {
                     <label
                         for="pragraph2"
                         class="block text-sm/6 font-medium text-gray-900"
-                        >Second Pragraph</label
+                    >Second Pragraph</label
                     >
                     <div class="mt-2">
                         <textarea
@@ -109,7 +121,7 @@ const handleProcessFile = (error: any, file: any, fieldName: string) => {
                         <label
                             for="cover-photo"
                             class="block text-sm/6 font-medium text-gray-900"
-                            >Cover photo</label
+                        >Cover photo</label
                         >
                         <FilePond
                             ref="pond"
@@ -117,7 +129,8 @@ const handleProcessFile = (error: any, file: any, fieldName: string) => {
                             :allow-multiple="false"
                             accepted-file-types="image/jpeg, image/png"
                             :server="{
-                                url: '/uploads/process',
+                                process: '/uploads/process',
+                                revert: '/uploads/process',
                                 headers: {
                                     'X-CSRF-TOKEN': csrfToken,
                                 },
@@ -130,7 +143,7 @@ const handleProcessFile = (error: any, file: any, fieldName: string) => {
                         <label
                             for="Photo1"
                             class="block text-sm/6 font-medium text-gray-900"
-                            >Photo 1</label
+                        >Photo 1</label
                         >
                         <FilePond
                             ref="pond"
@@ -138,7 +151,8 @@ const handleProcessFile = (error: any, file: any, fieldName: string) => {
                             :allow-multiple="false"
                             accepted-file-types="image/jpeg, image/png"
                             :server="{
-                                url: '/uploads/process',
+                                process: '/uploads/process',
+                                revert: '/uploads/process',
                                 headers: {
                                     'X-CSRF-TOKEN': csrfToken,
                                 },
@@ -151,7 +165,7 @@ const handleProcessFile = (error: any, file: any, fieldName: string) => {
                         <label
                             for="Photo2"
                             class="block text-sm/6 font-medium text-gray-900"
-                            >Photo 2</label
+                        >Photo 2</label
                         >
                         <FilePond
                             ref="pond"
@@ -159,7 +173,8 @@ const handleProcessFile = (error: any, file: any, fieldName: string) => {
                             :allow-multiple="false"
                             accepted-file-types="image/jpeg, image/png"
                             :server="{
-                                url: '/uploads/process',
+                                process: '/uploads/process',
+                                revert: '/uploads/process',
                                 headers: {
                                     'X-CSRF-TOKEN': csrfToken,
                                 },

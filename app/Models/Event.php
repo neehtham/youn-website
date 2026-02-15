@@ -12,9 +12,6 @@ class Event extends Model
         'excerpt',
         'paragraph1',
         'paragraph2',
-        'coverPhoto',
-        'Photo1',
-        'Photo2',
     ];
 
     /**
@@ -25,5 +22,8 @@ class Event extends Model
     public function getRouteKeyName()
     {
         return 'slug';
+    }
+    public function media(){
+        return $this->morphMany(Media::class, 'mediable');
     }
 }

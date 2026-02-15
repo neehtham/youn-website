@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('media', function (Blueprint $table) {
             $table->id();
+            $table->morphs('mediable');
+            $table->string('collection')->nullable();
+            $table->string('size');
+            $table->string('name');
+            $table->string('path');
             $table->timestamps();
         });
     }
@@ -22,6 +27,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('media');
+        Schema::table('media', function (Blueprint $table) {
+            $table->dropMorphs('mediable');
+        });
     }
 };

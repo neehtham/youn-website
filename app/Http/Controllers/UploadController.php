@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\Media;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Str;
@@ -47,7 +48,10 @@ final class UploadController extends Controller
     }
     public function deleteTemp(Request $request)
     {
-        $path = $request->get('path');
+        $path = $request->getContent();
+        if (empty($path)) {
+            $path = $request->get('path');
+        }
         Storage::disk('public')->delete($path);
         return response()->json(['message' => 'File deleted']);
     }
@@ -71,13 +75,21 @@ final class UploadController extends Controller
         $event->title = $request->title;
         $event->paragraph1 = $request->paragraph1;
         $event->paragraph2 = $request->paragraph2;
+        $event->save();
 
         foreach ($tempfiles as $filetype => $tempfile) {
             $permanentPath = str_replace('tmp/', 'photos/', $tempfile);
             Storage::disk('public')->move($tempfile, $permanentPath);
-            $event->$filetype = $permanentPath;
+            
+            Media::create([
+                'mediable_type' => 'events',
+                'mediable_id' => $event->id,
+                'collection' => $filetype,
+                'size' => Storage::disk('public')->size($permanentPath),
+                'name' => basename($permanentPath),
+                'path' => $permanentPath,
+            ]);
         };
-        $event->save();
         return redirect()
             ->route('dashboard')
             ->with('success', 'new event has created');
@@ -102,15 +114,27 @@ final class UploadController extends Controller
             'paragraph1' => $request->paragraph1,
             'paragraph2' => $request->paragraph2
         ];
+        $event->update($new);
+
         foreach ($tempfiles as $filetype => $tempfile) {
             if ($tempfile !== null) {
                 $permanentPath = str_replace('tmp/', 'photos/', $tempfile);
                 Storage::disk('public')->move($tempfile, $permanentPath);
-                $new[$filetype] = $permanentPath;
+                
+                // Delete old media in this collection if it exists
+                $event->media()->where('collection', $filetype)->delete();
+
+                Media::create([
+                    'mediable_type' => 'events',
+                    'mediable_id' => $event->id,
+                    'collection' => $filetype,
+                    'size' => Storage::disk('public')->size($permanentPath),
+                    'name' => basename($permanentPath),
+                    'path' => $permanentPath,
+                ]);
             }
         };
 
-        $event->update($new);
         return redirect()
             ->route('dashboard')
             ->with('success', 'new event has updated');
