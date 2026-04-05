@@ -121,7 +121,7 @@ const handleProcessFile = (error: any, file: any, fieldName: string) => {
                         >
                         <FilePond
                             ref="pond"
-                            label-idle="Drop files here..."
+                            label-idle="Drop file here..."
                             :allow-multiple="false"
                             :accepted-file-types="acceptedFileTypes"
                             :server="{
@@ -137,14 +137,14 @@ const handleProcessFile = (error: any, file: any, fieldName: string) => {
                     </div>
                     <div class="w-80">
                         <label
-                            for="Photo1"
+                            for="cover-photo"
                             class="block text-sm/6 font-medium text-gray-900"
-                            >Photo 1</label
+                            >Cover photo</label
                         >
                         <FilePond
                             ref="pond"
                             label-idle="Drop files here..."
-                            :allow-multiple="false"
+                            :allow-multiple="true"
                             :accepted-file-types="acceptedFileTypes"
                             :server="{
                                 process: '/uploads/process',
@@ -154,32 +154,11 @@ const handleProcessFile = (error: any, file: any, fieldName: string) => {
                                 },
                             }"
                             @init="handleFilePondInit"
-                            @processfile="(error: any, file: any) => handleProcessFile(error, file, 'Photo1')"
-                        />
-                    </div>
-                    <div class="w-80">
-                        <label
-                            for="Photo2"
-                            class="block text-sm/6 font-medium text-gray-900"
-                            >Photo 2</label
-                        >
-                        <FilePond
-                            ref="pond"
-                            label-idle="Drop files here..."
-                            :allow-multiple="false"
-                            :accepted-file-types="acceptedFileTypes"
-                            :server="{
-                                process: '/uploads/process',
-                                revert: '/uploads/process',
-                                headers: {
-                                    'X-CSRF-TOKEN': csrfToken,
-                                },
-                            }"
-                            @init="handleFilePondInit"
-                            @processfile="(error: any, file: any) => handleProcessFile(error, file, 'Photo2')"
+                            @processfile="(error: any, file: any) => handleProcessFile(error, file, 'galleryPhotos')"
                         />
                     </div>
                 </div>
+
             </div>
             <div class="mt-6 flex items-center justify-end gap-x-6">
                 <button

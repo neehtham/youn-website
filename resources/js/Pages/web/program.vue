@@ -6,6 +6,12 @@ const props = defineProps({
         required: true,
     },
 });
+
+import { computed } from "vue";
+
+const galleryImages = computed(() => {
+    return props.event.media?.filter((m: any) => m.collection === 'gallery') || [];
+});
 </script>
 <template>
     <MainLayout>
@@ -46,6 +52,15 @@ const props = defineProps({
                     {{ props.event.paragraph2 }}
                 </p>
             </div>
+            
+            <div class="col-span-1 md:col-span-2 mt-8" v-if="galleryImages.length > 0">
+                <h2 class="text-3xl font-bold mb-4 font-berlin text-blue">Gallery</h2>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                    <div v-for="image in galleryImages" :key="image.id" class="relative group">
+                        <img :src="`/${image.path}`" class="w-full h-48 object-cover rounded-lg shadow-md hover:scale-105 transition-transform duration-300" />
+                    </div>
+                </div>
+            </div>
         </div>
         <div
             class="p-6 max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 xl:hidden"
@@ -83,6 +98,15 @@ const props = defineProps({
                 <p>
                     {{ props.event.paragraph2 }}
                 </p>
+            </div>
+
+            <div class="col-span-1 md:col-span-2 mt-8" v-if="galleryImages.length > 0">
+                <h2 class="text-3xl font-bold mb-4 font-berlin text-blue">Gallery</h2>
+                <div class="grid grid-cols-2 gap-4">
+                    <div v-for="image in galleryImages" :key="image.id" class="relative group">
+                        <img :src="`/${image.path}`" class="w-full h-32 object-cover rounded-lg shadow-md" />
+                    </div>
+                </div>
             </div>
         </div>
     </MainLayout>

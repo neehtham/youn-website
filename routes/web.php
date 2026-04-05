@@ -3,6 +3,7 @@
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\MediaController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -31,6 +32,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/Programes/edit/{event}', [EventController::class, 'edit'])->name('event.edit');
     Route::put('/Programes/edit/{event}', [UploadController::class, 'update'])->name('event.update');
     Route::delete('/Programes/edit{event}', [EventController::class, 'destroy'])->name('event.delete');
+    Route::delete('/media/{media}', [MediaController::class, 'destroy'])->name('media.delete');
 });
 
 Route::get('/Programes', [EventController::class, 'index'])->name('event.index');

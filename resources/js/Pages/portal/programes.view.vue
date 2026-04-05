@@ -14,12 +14,11 @@ const props = defineProps({
 });
 
 const getImageUrl = (path: string | null) => {
-    if (!path) return "";
-    if (path.startsWith("http")) return path;
-    if (path.startsWith("/")) return path;
     return `/storage/${path}`;
 };
-console.log(props.events);
+for (const event of props.events as any[]) {
+    console.log(event.getMedia());
+}
 </script>
 
 <template>

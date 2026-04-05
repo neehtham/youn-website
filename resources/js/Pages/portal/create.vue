@@ -31,6 +31,7 @@ const form = useForm({
     coverPhoto: null,
     Photo1: null,
     Photo2: null,
+    gallery: [] as string[],
 });
 
 // form.slug = computed(() => {})
@@ -46,6 +47,9 @@ const handleProcessFile = (error: any, file: any, fieldName: string) => {
                 break;
             case "Photo2":
                 form.Photo2 = file.serverId;
+                break;
+            case "gallery":
+                form.gallery.push(file.serverId);
                 break;
         }
     }
@@ -140,47 +144,21 @@ const handleProcessFile = (error: any, file: any, fieldName: string) => {
                         />
                     </div>
                     <div class="w-80">
-                        <label
-                            for="Photo1"
-                            class="block text-sm/6 font-medium text-gray-900"
-                        >Photo 1</label
-                        >
+                        <label class="block text-sm/6 font-medium text-gray-900">Event Gallery</label>
                         <FilePond
                             ref="pond"
-                            label-idle="Drop files here..."
-                            :allow-multiple="false"
+                            label-idle="Drop multiple gallery images here..."
+                            :allow-multiple="true"
                             accepted-file-types="image/jpeg, image/png"
                             :server="{
-                                process: '/uploads/process',
-                                revert: '/uploads/process',
-                                headers: {
-                                    'X-CSRF-TOKEN': csrfToken,
-                                },
-                            }"
+                            process: '/uploads/process',
+                            revert: '/uploads/process',
+                            headers: {
+                                'X-CSRF-TOKEN': csrfToken,
+                            },
+                        }"
                             @init="handleFilePondInit"
-                            @processfile="(error: any, file: any) => handleProcessFile(error, file, 'Photo1')"
-                        />
-                    </div>
-                    <div class="w-80">
-                        <label
-                            for="Photo2"
-                            class="block text-sm/6 font-medium text-gray-900"
-                        >Photo 2</label
-                        >
-                        <FilePond
-                            ref="pond"
-                            label-idle="Drop files here..."
-                            :allow-multiple="false"
-                            accepted-file-types="image/jpeg, image/png"
-                            :server="{
-                                process: '/uploads/process',
-                                revert: '/uploads/process',
-                                headers: {
-                                    'X-CSRF-TOKEN': csrfToken,
-                                },
-                            }"
-                            @init="handleFilePondInit"
-                            @processfile="(error: any, file: any) => handleProcessFile(error, file, 'Photo2')"
+                            @processfile="(error: any, file: any) => handleProcessFile(error, file, 'galleryPhotos')"
                         />
                     </div>
                 </div>

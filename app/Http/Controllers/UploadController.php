@@ -90,6 +90,23 @@ final class UploadController extends Controller
                 'path' => $permanentPath,
             ]);
         };
+
+        if ($request->has('gallery')) {
+            foreach ($request->gallery as $galleryFile) {
+                $permanentPath = str_replace('tmp/', 'photos/', $galleryFile);
+                Storage::disk('public')->move($galleryFile, $permanentPath);
+                
+                Media::create([
+                    'mediable_type' => 'events',
+                    'mediable_id' => $event->id,
+                    'collection' => 'gallery',
+                    'size' => Storage::disk('public')->size($permanentPath),
+                    'name' => basename($permanentPath),
+                    'path' => $permanentPath,
+                ]);
+            }
+        }
+
         return redirect()
             ->route('dashboard')
             ->with('success', 'new event has created');
@@ -134,6 +151,22 @@ final class UploadController extends Controller
                 ]);
             }
         };
+
+        if ($request->has('gallery')) {
+            foreach ($request->gallery as $galleryFile) {
+                $permanentPath = str_replace('tmp/', 'photos/', $galleryFile);
+                Storage::disk('public')->move($galleryFile, $permanentPath);
+                
+                Media::create([
+                    'mediable_type' => 'events',
+                    'mediable_id' => $event->id,
+                    'collection' => 'gallery',
+                    'size' => Storage::disk('public')->size($permanentPath),
+                    'name' => basename($permanentPath),
+                    'path' => $permanentPath,
+                ]);
+            }
+        }
 
         return redirect()
             ->route('dashboard')

@@ -20,6 +20,7 @@ class EventController extends Controller
     }
     public function show(Event $event)
     {
+        $event->load('media');
         return inertia::render('web/program', ['event' => $event]);
     }
     public function view()
@@ -29,6 +30,7 @@ class EventController extends Controller
     }
     public function edit(Event $event)
     {
+        $event->load('media');
         return inertia::render('portal/program.edit', ['event' => $event]);
     }
     public function destroy(Event $event)

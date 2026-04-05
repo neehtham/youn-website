@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Event extends Model
 {
@@ -25,5 +26,16 @@ class Event extends Model
     }
     public function media(){
         return $this->morphMany(Media::class, 'mediable');
+    }
+
+    public function getMedia()
+    {
+        return $this->media()->get()->map(function ($media) {
+            return [
+                'id' => $media->id,
+                'name' => $media->name,
+                'url' => Storage::disk('public')->url($media->path),
+            ];
+        });
     }
 }
