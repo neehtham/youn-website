@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('media', function (Blueprint $table) {
+        Schema::create('events', function (Blueprint $table) {
             $table->id();
-            $table->morphs('mediable');
-            $table->string('collection')->nullable();
-            $table->string('size');
-            $table->string('name');
-            $table->string('path');
+            $table->string('title');
+            $table->string('slug')->unique();
+            $table->json('content');
+            $table->timestamp('published_verified_at')->nullable();
             $table->timestamps();
         });
     }
@@ -27,8 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('media', function (Blueprint $table) {
-            $table->dropMorphs('mediable');
-        });
+        Schema::dropIfExists('events');
     }
 };

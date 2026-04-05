@@ -4,16 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Event extends Model
+class News extends Model
 {
-    protected $fillable = ['title', 'slug', 'content', 'published_verified_at'];
+    protected $fillable = ['title', 'slug', 'content', 'event_id', 'published_verified_at'];
     protected $casts = [
         'content' => 'array',
         'published_verified_at' => 'datetime'
     ];
 
-    public function news()
+    public function event()
     {
-        return $this->hasMany(News::class);
+        return $this->belongsTo(Event::class);
     }
 }

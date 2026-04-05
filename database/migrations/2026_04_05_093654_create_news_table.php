@@ -11,14 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('events', function (Blueprint $table) {
+        Schema::create('news', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->longText('paragraph1');
-            $table->longText('paragraph2');
-            $table->string('coverPhoto');
-            $table->string('Photo1');
-            $table->string('Photo2');
+            $table->string('slug')->unique();
+            $table->json('content');
+            $table->foreignId('event_id')->constrained()->cascadeOnDelete();
+            $table->timestamp('published_verified_at')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('events');
+        Schema::dropIfExists('news');
     }
 };
